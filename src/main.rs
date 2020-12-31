@@ -89,6 +89,29 @@ impl Point<i32,i32>{
     }
 }
 
+
+fn return_reference<'a>(new_value:&'a String)->&'a str {
+    
+    new_value
+
+}
+
+fn return_implements<'a>()-> impl Clone {
+
+}
+
+
+fn pass_generic_with_trait_bound(item:&(impl Clone +MyTrait)){
+
+}
+
+
+// struct with lifetime
+
+struct NewStruct <'a>{
+    a:&'a str,
+    b:&'a i32
+}
 #[cfg(test)]
 
 
@@ -115,3 +138,23 @@ mod tests {
 }
 
 
+// first rule is that each input reference gets it own lifetime
+
+// example fn diff_lifetimes(a:&'x str,b:&'y str) each
+
+// lifetime elision rules
+// if there is one input reference the outputs gets assigned the same reference
+
+// example
+
+// the third is that if there are multiple input lifetimes and one of them
+// is &self or &mut self the output gets assigned the same lifetimee
+
+fn one_input(item:&str)->&str{
+    let new_string=String::from(item);
+
+    // &new_string
+    item
+}
+
+// works 

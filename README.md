@@ -128,3 +128,68 @@ impl MyTrait for Rectangle {
 
 ```
 
+
+
+
+### Lifetimes
+
+lifetime denotes the validity of the reference and  prevent dangling references (reference that point to nothing)
+example of a dangling reference
+
+``` rust
+
+let r;
+
+{
+
+    let t=5; //scope of t starts here
+    r=&t;
+
+//t id dropped  here leaving a dangling reference
+}
+
+```
+
+the above would cause compile time error the value t does not ling past the curly braces so that would leave r with a dangling reference
+
+
+
+Lifetimes on function or method parameters are called input lifetimes, and lifetimes on return values are called output lifetimes.
+
+
+### Lifetime elision rules
+
+1. each  input reference is assigned its own lifetime
+
+``` rust
+
+fn multiple_reference_inputs(item1:&str,item2:&str)->&str
+
+fn multiple_reference_inputs<'a,'b>(item1:&'a str,item2:&'a str)
+
+```
+
+
+2. if there is only one reference in input the output is assigned the same lifetime 
+for example
+
+``` rust
+let one_input_reference(item:&str)->str
+// in this case if let lifetime of item is 'a the output will have the 
+//sa,e lifetime
+```
+3. if there multiple reference and one of them &self or & mut self
+the output reference is assigned the same  lifetime as self
+
+for example
+
+``` rust
+  struct Item <'a>{
+      x:&'a str
+  }
+  
+  impl <'a> Item <'a>{
+      fn caller(&self,item:&str)->&str
+    //   in this case the output will be assigned the same lifetime as self
+  }
+```
