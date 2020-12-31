@@ -35,7 +35,7 @@ fn past_generic_type(item1:i32){
 }
 
 ```
-#### returning generics arguments 
+#### returning generics types
 ``` rust
 fn past_generic_type<T>()->T {
 
