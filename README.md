@@ -19,7 +19,7 @@ for example we can pass an argument of a type that is dynamic
 
 
 ``` rust
-fn  past_generic_type <T> (item1:T){
+fn  pass_generic_type <T> (item1:T){
 
 }
 ```
@@ -30,14 +30,16 @@ at compile time the complile time the compile replaces each generic type with th
 for example 
 
 ``` rust
-fn past_generic_type(item1:i32){
-
+fn pass_generic_type(item1:i32){
 }
+
+fn pass_generic_type(item1:String)
+fn pass_generic_type(item1:f64)
 
 ```
 #### returning generics types
 ``` rust
-fn past_generic_type<T>()->T {
+fn pass_generic_type<T>()->T {
 
 }
 ```
